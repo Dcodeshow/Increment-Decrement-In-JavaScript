@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>D Code Show</title>
+    <meta charset="UTF-8">
+    <!--Font Awesome CDN Link-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="quantity">
+        <button class="minus-btn btn  disabled" type="button">-</button>
+        <input id="quantity" type="text" value="1" readonly>
+        <button class="btn plus-btn" type="button">+</button>
+    </div>
+
+    <!---Will calculate price--->
+    <p class="total-price">
+        <span><i class="fa fa-rupee"></i></span>
+        <span id="price">100</span>
+    </p>
+
+
+
+    <script>
+        //setting default attribute to disabled
+        document.querySelector(".minus-btn").setAttribute("disabled", "disabled");
+
+        //taking value to increment decrement input value
+        var valueCount;
+
+        //taking price value in variable
+        var price = document.getElementById("price").innerText;
+
+        //price calculation function
+        function priceTotal() {
+            var total = valueCount * price;
+            document.getElementById("price").innerText = total
+        }
+
+        //plus button
+        document.querySelector(".plus-btn").addEventListener("click", function() {
+            //getting value of input
+            valueCount = document.getElementById("quantity").value;
+            //input value increment by 1
+            valueCount++;
+            //setting increment input value
+            document.getElementById("quantity").value = valueCount;
+
+            //input value is > 1 using removeattribute and removeclass method
+            if (valueCount > 1) {
+                document.querySelector(".minus-btn").removeAttribute("disabled");
+                document.querySelector(".minus-btn").classList.remove("disabled")
+            }
+
+            //Calling price Function
+            priceTotal()
+        })
+
+        //same process for minus button
+        document.querySelector(".minus-btn").addEventListener("click", function() {
+            valueCount = document.getElementById("quantity").value;
+            //input value decrement by 1
+            valueCount--;
+            document.getElementById("quantity").value = valueCount;
+            console.log(valueCount);
+            if (valueCount == 1) {
+                document.querySelector(".minus-btn").setAttribute("disabled", "disabled")
+
+            }
+            priceTotal()
+        })
+    </script>
+</body>
+
+</html>
